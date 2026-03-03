@@ -1,1 +1,44 @@
-<p>login works!</p>
+<section class="contenedor">
+
+    <h1 class="cabecera-admin">Login</h1>
+    
+    <section class="registro">
+
+        <div class="contenedor-boton-registro">
+            <h6>¿No eres mienbro del Pisito?</h6>
+            <img src="assets/img/el-pisito.svg" class="imagen-logo">
+            <img src="assets/img/el-pisito.svg" class="imagen-logo2">
+            <img src="assets/img/el-pisito.svg" class="imagen-logo3">
+
+            <button type="button" class="btn btn-md btn-primary" routerLink="/auth/registro-usuario">Regístrate</button>
+        </div>
+
+    </section>
+
+    <section class="contenedor-formulario">
+
+        <form #form="ngForm" (ngSubmit)="login()" [formGroup]="loginForm">
+
+            <div class="mb-3">
+                <label for="usuario">USUARIO</label>
+                <input type="text" id="usuario" name="usuario" class="form-control" autocomplete="off"
+                    [class.is-invalid]="loginForm.get('elUsuario')?.invalid && loginForm.get('elUsuario')?.touched"
+                    formControlName="elUsuario">
+            </div>
+
+            <div class="mb-3">
+                <label for="contrasena">PASSWORD</label>
+                <input type="password" id="password" name="password" class="form-control" autocomplete="off"
+                    [class.is-invalid]="loginForm.get('elPassword')?.invalid && loginForm.get('elPassword')?.touched"
+                    formControlName="elPassword">
+            </div>
+
+            <div class="contenedor-boton">
+                <button type="submit" class="btn btn-md btn-primary" [disabled]="form.invalid">Iniciar Sesión</button>
+            </div>
+
+        </form>
+
+    </section>
+
+</section>
