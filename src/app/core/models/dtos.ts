@@ -45,7 +45,7 @@ export interface ErrorResponseDTO {
     timeStamp:Date;
     status:number;
     error:string;
-    msgPersonal:string;
+    mensaje:string;
     message:string;
     path:string;
 }

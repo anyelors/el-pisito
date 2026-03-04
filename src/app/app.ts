@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MenuPrincipal } from './shared/components/menu-principal/menu-principal';
 import { Header } from './shared/components/header/header';
 import { Footer } from './shared/components/footer/footer';
+import { AuthService } from './core/services/auth-service';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,12 @@ import { Footer } from './shared/components/footer/footer';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
+export class App implements OnInit {
+  
+  private _authService:AuthService = inject(AuthService);
+
+  ngOnInit(): void {
+    this._authService.getMe();
+  }
   
 }

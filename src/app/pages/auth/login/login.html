@@ -20,14 +20,14 @@
         <form #form="ngForm" (ngSubmit)="login()" [formGroup]="loginForm">
 
             <div class="mb-3">
-                <label for="usuario">USUARIO</label>
+                <label for="usuario">USUARIO*</label>
                 <input type="text" id="usuario" name="usuario" class="form-control" autocomplete="off"
                     [class.is-invalid]="loginForm.get('elUsuario')?.invalid && loginForm.get('elUsuario')?.touched"
                     formControlName="elUsuario">
             </div>
 
             <div class="mb-3">
-                <label for="contrasena">PASSWORD</label>
+                <label for="contrasena">PASSWORD*</label>
                 <input type="password" id="password" name="password" class="form-control" autocomplete="off"
                     [class.is-invalid]="loginForm.get('elPassword')?.invalid && loginForm.get('elPassword')?.touched"
                     formControlName="elPassword">

@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Usuario } from '../models/entities';
 import { Observable } from 'rxjs';
 import { UsuarioDTO } from '../models/dtos';
-import { URL_API } from '../enviroments/globals';
+import { URL_API } from '../environments/globals';
 
 @Injectable({
   providedIn: 'root',

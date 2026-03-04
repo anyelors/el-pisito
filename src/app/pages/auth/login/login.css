@@ -10,10 +10,6 @@
     justify-content: right;
 }
 
-.contenedor-formulario{
-    padding: 2rem 0;
-}
-
 .registro{
     background-color: var(--azul-logo);
     color: white;

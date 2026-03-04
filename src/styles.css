@@ -66,14 +66,14 @@ table {
 		--gris-claro:#eceeef;
 		--negro:#151515;
 		--rojo-aviso:#aa1d1d;
+		--verde-tabla:green;
+		--rojo-tabla:red;
 
 	}
 
 /* ==================================================================================== */
 /* FIRST MOBILE */
 /* ==================================================================================== */
-
-
 
 *{
 
@@ -121,10 +121,102 @@ h3{
 /* ==================================================================================== */
 /* TABLAS */
 /* ==================================================================================== */
+.thumb-list-imagen{
+	height: 50px;
+	width: auto;
+	border-radius: 0.5rem;
+	vertical-align: middle;
+}
 
+.contenedor-listado{
+	padding: 1rem;
+}
 
+.contenedor-tabla{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
 
+table{
+	width: 100%;
+}
+
+table .item-inactivo, table .item-noactual{
+	font-size: 1.2rem;
+	color: var(--rojo-tabla);
+	text-align: center;
+}
+
+table .item-activo, table .item-actual{
+	font-size: 1.2rem;
+	color: var(--verde-tabla);
+	text-align: center;
+}
+
+.centrar-activo{
+	text-align: center;
+}
+
+.centrar-actual{
+	text-align: center;
+}
+
+.centrar-numero-banners{
+	text-align: center;
+}
+
+.centrar-portada{
+	text-align: center;
+}
+
+thead tr{
+	border-bottom: var(--gris-medio) solid 1px;
+	border-top: var(--gris-medio) solid 1px;
+}
+
+td, th{
+	vertical-align: middle;
+}
 
 /* ==================================================================================== */
 /* FORMULARIOS */
+/* ==================================================================================== */
+.formulario{
+	width: 50%;
+}
+
+.id-form{
+	background-color: var(--gris-claro);
+	border-radius: 5px;
+	padding: 0.5rem;
+}
+
+.cursor-check{
+	cursor: pointer;
+}
+
+.contenedor-formulario{
+	display: flex;
+	align-items: center;
+	padding: 2rem 0;
+	flex-direction: column;
+}
+
+.contenedor-boton{
+	display: flex;
+	justify-content: right;
+}
+
+.select-inactivo{
+	background-color: var(--rojo-aviso);
+	color: white;
+}
+
+.select-tematica-actual{
+	background-color: var(--amarillo-logo);
+	color: white;
+}
+/* ==================================================================================== */
+/* FIN FORMULARIOS */
 /* ==================================================================================== */
