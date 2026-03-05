@@ -29,12 +29,19 @@ export class AuthService {
     });
   }
 
+  resetEstado():void{
+    this.usuario.set(null);
+    this.isLoggedIn.set(false);
+    this.loading.set(false);
+  }
+
   logout():void{
     this._http.get<CredencialesRespuesta>(`${URL_AUTH}logout`).subscribe({
       next: (datos:CredencialesRespuesta) => {
-        //datos.mensaje;
-        this.usuario.set(null);
-        this.isLoggedIn.set(false);
+        this.resetEstado();
+      },
+      complete: () => {
+        this._router.navigate(["/auth/login"])
       }
     });
   }
@@ -47,9 +54,7 @@ export class AuthService {
           this.isLoggedIn.set(true);
           this.loading.set(false);
         } else {
-          this.usuario.set(null);
-          this.isLoggedIn.set(false);
-          this.loading.set(false);
+          this.resetEstado();
         }
       }
     });

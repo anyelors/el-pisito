@@ -16,6 +16,15 @@
     width: auto;
 }
 
+.logout{
+    cursor: pointer;
+}
+
+.usuario{
+    background-color: var(--amarillo-logo);
+    border-radius: 8px;
+}
+
 
 
 /* ================================================= */

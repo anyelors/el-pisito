@@ -63,65 +63,107 @@
             Administración
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item" href="#">+
+            <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item" routerLink="/admin/add-inmueble">+
                 Inmueble</a></li>
             <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item"
-                href="#">Listado de Inmuebles</a></li>
+                routerLink="/admin/list-inmueble">Listado de Inmuebles</a></li>
+            
             <li class="dropdown-divider"></li>
-            <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item" href="#">+
+            <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item" routerLink="/admin/add-poblacion">+
                 Población</a></li>
             <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item"
-                href="#">Listado de Poblaciones</a></li>
+                routerLink="/admin/list-poblacion">Listado de Poblaciones</a></li>
+            
             <li class="dropdown-divider"></li>
-            <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item" href="#">+
+            <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item" routerLink="/admin/add-provincia">+
                 Provincias</a></li>
             <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item"
-                href="#">Listado de Provincias</a></li>
+                routerLink="/admin/list-provincia">Listado de Provincias</a></li>
+            
             <li class="dropdown-divider"></li>
-            <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item" href="#">+
+            <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item" routerLink="/admin/add-tipo">+
                 Tipo</a></li>
             <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item"
-                href="#">Listado de Tipos</a></li>
+                routerLink="/admin/list-tipo">Listado de Tipos</a></li>
+            
             <li class="dropdown-divider"></li>
-            <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item" href="#">+
+            <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item" routerLink="/admin/add-operacion">+
                 Operación</a></li>
             <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item"
-                href="#">Listado de Operaciones</a></li>
+                routerLink="/admin/list-operacion">Listado de Operaciones</a></li>
+
+            <li class="dropdown-divider"></li>
+            <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item" routerLink="/admin/add-inmobiliaria">+
+                Inmobiliaria</a></li>
+            <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item"
+                routerLink="/admin/list-inmobiliaria">Listado de Inmobiliarias</a></li>
+
+            <li class="dropdown-divider"></li>
+            <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item" routerLink="/admin/add-pagina">+
+                Pagina</a></li>
+            <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item"
+                routerLink="/admin/list-pagina">Listado de Paginas</a></li>                
+
             @if (_authService.usuario()?.rol === "ROLE_SUPERADMIN") {
               <li class="dropdown-divider"></li>
-              <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item" href="#">+
+              <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item" routerLink="/admin/add-usuario">+
                   Usuario</a></li>
               <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item"
-                  href="#">Listado de Usuarios</a></li>
+                  routerLink="/admin/list-usuario">Listado de Usuarios</a></li>
             }
+
             <li class="dropdown-divider"></li>
-            <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item" href="#">+
+            <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item" routerLink="/admin/add-banner">+
                 Banner</a></li>
             <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item"
-                href="#">Listado de Banners</a></li>
+                routerLink="/admin/list-banner">Listado de Banners</a></li>
+
             <li class="dropdown-divider"></li>
-            <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item" href="#">+
+            <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item" routerLink="/admin/add-banner-carousel">+
                 Banner Carousel</a></li>
             <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item"
-                href="#">Listado de Banner Carousel</a></li>
+                routerLink="/admin/list-banner-carousel">Listado de Banner Carousel</a></li>
+
             <li class="dropdown-divider"></li>
-            <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item" href="#">+
+            <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item" routerLink="/admin/add-tematica">+
                 Temática</a></li>
             <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item"
-                href="#">Listado de Temáticas</a></li>
+                routerLink="/admin/list-tematica">Listado de Temáticas</a></li>
             @if (_authService.usuario()?.rol === "ROLE_SUPERADMIN") {
             <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item"
-                href="#">Cambio de Temática</a></li>
+                routerLink="/admin/admin-tematica">Cambio de Temática</a></li>
             }    
           </ul>
         </li>
         }
 
         @if (_authService.isLoggedIn()) {
-        <li class="nav-item">
-          <a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="nav-link" aria-current="page"
-            routerLink="/auth/login" (click)="logout()">Logout</a>
+        
+        <li class="nav-item dropdown usuario">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkCorporativo" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+
+            @if (_authService.usuario()?.rol === "ROLE_USUARIO") {
+              <i class="fa-solid fa-user"></i>
+            }@else if (_authService.usuario()?.rol === "ROLE_ADMIN") {
+              <i class="fa-solid fa-user-gear"></i>
+            }@else if (_authService.usuario()?.rol === "ROLE_SUPERADMIN") {
+              <i class="fa-solid fa-user-plus"></i>
+            }
+
+            {{_authService.usuario()?.nombre}}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item"
+                routerLink="sobre-nosotros">Mis favoritos</a></li>
+            <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item"
+                routerLink="contactar">Mi perfil</a></li>
+            <li><a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="dropdown-item logout"
+                (click)="logout()">Logout</a>
+            </li>
+          </ul>
         </li>
+
         }@else {
         <li class="nav-item">
           <a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="nav-link" aria-current="page"

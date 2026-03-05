@@ -182,9 +182,6 @@ td, th{
 /* ==================================================================================== */
 /* FORMULARIOS */
 /* ==================================================================================== */
-.formulario{
-	width: 50%;
-}
 
 .id-form{
 	background-color: var(--gris-claro);
@@ -198,9 +195,9 @@ td, th{
 
 .contenedor-formulario{
 	display: flex;
-	align-items: center;
-	padding: 2rem 0;
 	flex-direction: column;
+	margin-top: 1rem;
+	padding: 1rem;
 }
 
 .contenedor-boton{
