@@ -24,6 +24,10 @@ export class InmuebleService {
     return this._http.get<InmuebleImagenDTO[]>(`${URL_API}inmuebles-portada`);
   }
 
+  getInmueblesInmobiliaria(id:number):Observable<InmuebleImagenDTO[]> {
+    return this._http.get<InmuebleImagenDTO[]>(`${URL_API}inmuebles-inmobiliaria/${id}`);
+  }
+
   getInmueble(id:number):Observable<InmuebleImagenDTO> {
     return this._http.get<InmuebleImagenDTO>(`${URL_API}inmueble/${id}`);
   }

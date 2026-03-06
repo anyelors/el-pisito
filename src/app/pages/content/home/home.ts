@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
-import { ListInmueble } from "../../admin/list-inmueble/list-inmueble";
+import { ListInmueble } from '../../../shared/components/list-inmueble/list-inmueble';
 
 @Component({
   selector: 'app-home',
   imports: [ListInmueble],
   templateUrl: './home.html',
-  styleUrl: './home.css',
+  styleUrl: './home.css'
 })
 export class Home {
+
+
 
 }
