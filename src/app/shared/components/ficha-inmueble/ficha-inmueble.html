@@ -1,0 +1,45 @@
+<article class="contenedor">
+
+    <header class="carousel-ficha">
+        <app-carousel-ficha [datos]="datos"/>
+
+    </header>
+
+    <div class="datos-generales">
+
+        <header class="cabecera-datos">
+            <h3 class="claim">{{datos.claim}} {{datos.poblacion.nombre}}</h3>
+            <p class="precio">{{datos.precio | euros}}</p>
+            <p class="descripcion">{{datos.descripcion}}</p>
+        </header>
+
+        <footer class="footer-datos">
+            <div class="iconos">
+                <div class="icono">
+                    <span>{{datos.banhos}}</span>
+                    <img src="assets/img/banos.svg">
+                </div>
+
+                <div class="icono">
+                    <span>{{datos.habitaciones}}</span>
+                    <img src="assets/img/habitaciones.svg">
+                </div>
+
+                <div class="icono">
+                    <span>{{datos.planta}}</span>
+                    <img src="assets/img/planta.svg">
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    @if (_authService.isLoggedIn() && (_authService.usuario()?.rol === "ROLE_SUPERADMIN" || _authService.usuario()?.rol === "ROLE_ADMIN")) {
+        <app-boton-admin [idInmueble]="datos.id"/>
+    }
+
+    <app-gadget-logo-inmobiliaria />
+    
+    <app-corazon-favoritos class="corazon-favoritos" [idInmueble]="datos.id"/>
+
+</article>

@@ -6,10 +6,12 @@ import { AuthService } from '../../../core/services/auth-service';
 import { FinderData } from '../../../core/models/auxiliares';
 import { Preloader } from "../preloader/preloader";
 import { ControlCargaService } from '../../../core/services/control-carga-service';
+import { FichaInmueble } from "../ficha-inmueble/ficha-inmueble";
 
 @Component({
   selector: 'app-list-inmueble',
-  imports: [Preloader],
+  imports: [Preloader, FichaInmueble],
+  providers: [ControlCargaService],
   templateUrl: './list-inmueble.html',
   styleUrl: './list-inmueble.css'
 })
@@ -18,18 +20,18 @@ export class ListInmueble implements OnInit {
   private _inmuebleService:InmuebleService = inject(InmuebleService);
   private _favoritoService:FavoritosService = inject(FavoritosService);
   private _authService:AuthService = inject(AuthService);
-  public _controCargalService:ControlCargaService = inject(ControlCargaService)
+  public _controlCargaService:ControlCargaService = inject(ControlCargaService);
 
   @Input() dondeEstoy:string;
   @Input() finderData:FinderData;
   @Input() idInmobiliaria:number;
   
   usuarioId:number|undefined;
+  inmuebles = signal<InmuebleImagenDTO[]>([]);
 
   ngOnInit(): void {
 
-    this._controCargalService.reset();
-    this._controCargalService.nFases.set(1);
+    this._controlCargaService.nFases.set(1);
 
     this._authService.getMe();
     this.usuarioId = this._authService.usuario()?.id;
@@ -51,9 +53,11 @@ export class ListInmueble implements OnInit {
       this._inmuebleService.getInmueblesPortada().subscribe({
         next:(datos:InmuebleImagenDTO[]) => {
           console.log(datos);
+
+          this.inmuebles.set(datos);
         },
         complete:() => {
-          this._controCargalService.faseCarga();
+          this._controlCargaService.faseCarga();
         }
       });
 
@@ -67,7 +71,7 @@ export class ListInmueble implements OnInit {
           console.log(datos);
         },
         complete:() => {
-          this._controCargalService.faseCarga();
+          this._controlCargaService.faseCarga();
         }
       })
     } else {
@@ -83,7 +87,7 @@ export class ListInmueble implements OnInit {
           console.log(datos);
         },
         complete:() => {
-          this._controCargalService.faseCarga();
+          this._controlCargaService.faseCarga();
         }
       });
 
@@ -96,7 +100,7 @@ export class ListInmueble implements OnInit {
           console.log(datos);
         },
         complete:() => {
-          this._controCargalService.faseCarga();
+          this._controlCargaService.faseCarga();
         }
       });
 
