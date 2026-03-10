@@ -5,11 +5,25 @@
     position: relative;
 }
 
-.gadget{
+.gadget-numero-imagenes{
     position: absolute;
     bottom: 20px;
     left: 20px;
     z-index: 30;
+}
+
+button.carousel-control-prev{
+    top: 35%;
+    left: 8%;
+    height: 30%;
+    transform: translate(-50%);
+}
+
+button.carousel-control-next{
+    top: 35%;
+    right: 8%;
+    height: 30%;
+    transform: translate(50%);
 }
 
 .contenedor-no-imagen img{

@@ -1,1 +1,37 @@
-<p>corazon-favoritos works!</p>
+<section class="contenedor">
+
+    @if (_authService.isLoggedIn() && _controlCargaService.cargaCompletada()) {
+
+        @if (esFavorito()) {
+            <i class="fa-solid fa-heart" (click)="deleteFavorito()"></i>
+        }@else {
+            <i class="fa-regular fa-heart" (click)="addFavorito()"></i>
+        }
+
+    }@else {
+        <i class="fa-regular fa-heart" routerLink="/auth/login"></i>
+    }
+    
+</section>
+
+<!-- MODAL -->
+<div #favoritoModal class="modal fade" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Favoritos!!!</h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+
+      <div class="modal-body">
+        <p>Contenido del modal</p>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeModal()">Cerrar</button>
+      </div>
+
+    </div>
+  </div>
+</div>
