@@ -3,3 +3,10 @@ export interface FinderData {
     idPoblacion:number;
     idOperacion:number;
 }
+
+export interface ModalData {
+    titulo?:string;
+    mensaje?:string;
+    imagen?:string;
+    accion?:string;
+}

@@ -1,10 +1,12 @@
-import { AfterViewInit, Component, ElementRef, inject, Input, OnInit, signal, ViewChild } from '@angular/core';
+import { Component, inject, Input, OnInit, signal } from '@angular/core';
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from '../../../core/services/auth-service';
 import { FavoritosService } from '../../../core/services/favoritos-service';
 import { InmuebleIdDTO, InmuebleImagenDTO } from '../../../core/models/dtos';
 import { ControlCargaService } from '../../../core/services/control-carga-service';
-import { Modal } from 'bootstrap';
+import { App } from '../../../app';
+import { ModalData } from '../../../core/models/auxiliares';
+import { ModalService } from '../../../core/services/modal-service';
 
 @Component({
   selector: 'app-corazon-favoritos',
@@ -13,15 +15,14 @@ import { Modal } from 'bootstrap';
   templateUrl: './corazon-favoritos.html',
   styleUrl: './corazon-favoritos.css',
 })
-export class CorazonFavoritos implements OnInit, AfterViewInit {
+export class CorazonFavoritos implements OnInit {
     
   public _authService:AuthService = inject(AuthService);
   private _favoritosService:FavoritosService = inject(FavoritosService);
   public _controlCargaService:ControlCargaService = inject(ControlCargaService)
   private _router:Router = inject(Router);
-
-  @ViewChild('favoritoModal') ventanaModalFavoritos!:ElementRef;
-  modal!: Modal;
+  private _modalService:ModalService = inject(ModalService);
+  private _app:App = inject(App);
 
   esFavorito = signal<boolean>(false);
   inmueble:InmuebleImagenDTO;
@@ -29,7 +30,15 @@ export class CorazonFavoritos implements OnInit, AfterViewInit {
   usuarioId:number;
   @Input() idInmueble:number;
 
+  modalData:ModalData = {
+    titulo:"",
+    mensaje:"",
+    imagen:"",
+    accion:""
+  }
+
   ngOnInit(): void {
+
     this._controlCargaService.nFases.set(1);
     
     if (this._authService.isLoggedIn()) {
@@ -39,10 +48,6 @@ export class CorazonFavoritos implements OnInit, AfterViewInit {
       this._controlCargaService.faseCarga();
     }
     
-  }
-
-  ngAfterViewInit(): void {
-    this.modal = new Modal(this.ventanaModalFavoritos.nativeElement);
   }
 
   getFavoritos():void{
@@ -64,7 +69,12 @@ export class CorazonFavoritos implements OnInit, AfterViewInit {
           this.inmueble = inmueble;
         },
         complete:() => {
-          this.modal.show();
+          this.modalData.titulo = "Nuevo Favorito";
+          this.modalData.mensaje = `El inmueble situado en la ${this.inmueble.via} ${this.inmueble.nombreVia} de ${this.inmueble.poblacion.nombre} (${this.inmueble.poblacion.provincia.nombre}) con un precio de ${this.inmueble.precio}€ se ha añadido a su lista de favoritos`;
+          this.modalData.imagen = "ok-modal.png"
+          this.modalData.accion = "openModal"
+          this._modalService.accionModal(this.modalData);
+
           this.esFavorito.set(true);
         }
       });
@@ -80,21 +90,18 @@ export class CorazonFavoritos implements OnInit, AfterViewInit {
           this.inmueble = inmueble;
         },
         complete:() => {
-          this.modal.show();
+          this.modalData.titulo = "Eliminar Favorito";
+          this.modalData.mensaje = `El inmueble situado en la ${this.inmueble.via} ${this.inmueble.nombreVia} de ${this.inmueble.poblacion.nombre} (${this.inmueble.poblacion.provincia.nombre}) con un precio de ${this.inmueble.precio}€ ha sido eliminado de su lista de favoritos`;
+          this.modalData.imagen = "ok-modal.png"
+          this.modalData.accion = "openModal"
+          this._modalService.accionModal(this.modalData);
+
           this.esFavorito.set(false);
         }
       });
     } else {
       this._router.navigate(['/auth/login']);
     }
-  }
-
-  openModal() {
-    this.modal.show();
-  }
-
-  closeModal() {
-    this.modal.hide();
   }
 
 }

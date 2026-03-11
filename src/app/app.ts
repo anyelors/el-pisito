@@ -1,11 +1,12 @@
-import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, Input, OnInit, signal, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MenuPrincipal } from './shared/components/menu-principal/menu-principal';
 import { Header } from './shared/components/header/header';
 import { Footer } from './shared/components/footer/footer';
 import { AuthService } from './core/services/auth-service';
-
-declare var bootstrap:any;
+import * as bootstrap from 'bootstrap';
+import { ModalService } from './core/services/modal-service';
+import { ModalData } from './core/models/auxiliares';
 
 @Component({
   selector: 'app-root',
@@ -16,13 +17,45 @@ declare var bootstrap:any;
 export class App implements OnInit, AfterViewInit {
     
   private _authService:AuthService = inject(AuthService);
+  public _modalService:ModalService = inject(ModalService);
+
+  titulo:string|undefined;
+  mensaje:string|undefined;
+  imagen:string|undefined;
+  accion:string|undefined;
+
+  acciones = {
+    openModal:()=> this.modal.show(),
+    closeModal:()=> this.modal.hide(),
+  };
+
+  @ViewChild('modal') modalElement!: ElementRef;
+  modal!: bootstrap.Modal;
+  //titulo = signal<string>("");
+  //mensaje = signal<string>("");
 
   ngOnInit(): void {
+    this._modalService.modalState$.subscribe({
+      next: (datos:ModalData) =>{
+        console.log(datos);
+        this.titulo = datos.titulo;
+        this.mensaje = datos.mensaje;
+        this.imagen = datos.imagen;
+        this.accion = datos.accion;
+
+        this.acciones.openModal();
+
+      }
+    });
     this._authService.getMe();
   }
 
-  ngAfterViewInit(): void {
-    throw new Error('Method not implemented.');
+  ngAfterViewInit() {
+    this.modal = new bootstrap.Modal(this.modalElement.nativeElement);
+  }
+
+  closeModal():void {
+    this.modal.hide();
   }
   
 }
