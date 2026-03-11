@@ -4,7 +4,6 @@ import { AuthService } from '../../../core/services/auth-service';
 import { FavoritosService } from '../../../core/services/favoritos-service';
 import { InmuebleIdDTO, InmuebleImagenDTO } from '../../../core/models/dtos';
 import { ControlCargaService } from '../../../core/services/control-carga-service';
-import { App } from '../../../app';
 import { ModalData } from '../../../core/models/auxiliares';
 import { ModalService } from '../../../core/services/modal-service';
 
@@ -22,7 +21,6 @@ export class CorazonFavoritos implements OnInit {
   public _controlCargaService:ControlCargaService = inject(ControlCargaService)
   private _router:Router = inject(Router);
   private _modalService:ModalService = inject(ModalService);
-  private _app:App = inject(App);
 
   esFavorito = signal<boolean>(false);
   inmueble:InmuebleImagenDTO;

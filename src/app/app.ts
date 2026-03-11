@@ -31,8 +31,6 @@ export class App implements OnInit, AfterViewInit {
 
   @ViewChild('modal') modalElement!: ElementRef;
   modal!: bootstrap.Modal;
-  //titulo = signal<string>("");
-  //mensaje = signal<string>("");
 
   ngOnInit(): void {
     this._modalService.modalState$.subscribe({
@@ -42,9 +40,9 @@ export class App implements OnInit, AfterViewInit {
         this.mensaje = datos.mensaje;
         this.imagen = datos.imagen;
         this.accion = datos.accion;
-
-        this.acciones.openModal();
-
+      },
+      complete: () => {
+        this.acciones[this.accion as keyof typeof this.acciones]();
       }
     });
     this._authService.getMe();
