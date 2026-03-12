@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, inject, Input, OnInit, signal, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, effect, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MenuPrincipal } from './shared/components/menu-principal/menu-principal';
 import { Header } from './shared/components/header/header';
@@ -6,7 +6,6 @@ import { Footer } from './shared/components/footer/footer';
 import { AuthService } from './core/services/auth-service';
 import * as bootstrap from 'bootstrap';
 import { ModalService } from './core/services/modal-service';
-import { ModalData } from './core/models/auxiliares';
 
 @Component({
   selector: 'app-root',
@@ -15,45 +14,38 @@ import { ModalData } from './core/models/auxiliares';
   styleUrl: './app.css'
 })
 export class App implements OnInit, AfterViewInit {
-    
+
   private _authService:AuthService = inject(AuthService);
   public _modalService:ModalService = inject(ModalService);
-
-  titulo:string|undefined;
-  mensaje:string|undefined;
-  imagen:string|undefined;
-  accion:string|undefined;
-
-  acciones = {
-    openModal:()=> this.modal.show(),
-    closeModal:()=> this.modal.hide(),
-  };
 
   @ViewChild('modal') modalElement!: ElementRef;
   modal!: bootstrap.Modal;
 
-  ngOnInit(): void {
-    this._modalService.modalState$.subscribe({
-      next: (datos:ModalData) =>{
-        console.log(datos);
-        this.titulo = datos.titulo;
-        this.mensaje = datos.mensaje;
-        this.imagen = datos.imagen;
-        this.accion = datos.accion;
-      },
-      complete: () => {
-        this.acciones[this.accion as keyof typeof this.acciones]();
+  constructor() {
+    
+    effect(() => {
+      const isOpen:boolean = this._modalService.isOpen();
+
+      if (!isOpen) return;
+
+      if (isOpen) {
+        this.modal.show();
+      } else {
+        this.modal.hide();
       }
     });
+
+  }
+
+  ngOnInit(): void {
     this._authService.getMe();
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit():void {
     this.modal = new bootstrap.Modal(this.modalElement.nativeElement);
-  }
-
-  closeModal():void {
-    this.modal.hide();
+    this.modalElement.nativeElement.addEventListener('hidden.bs.modal', () => {
+      this._modalService.close();
+    });
   }
   
 }

@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
 import { ModalData } from '../models/auxiliares';
 
 @Injectable({
@@ -7,11 +6,17 @@ import { ModalData } from '../models/auxiliares';
 })
 export class ModalService {
 
-  private modalSubject:BehaviorSubject<ModalData> = new BehaviorSubject<ModalData>({});
-  modalState$ = this.modalSubject.asObservable();
+  modalData = signal<ModalData | null>(null);
+  isOpen = signal(false);
+  
+  open(data:ModalData):void{
+    this.modalData.set(data);
+    this.isOpen.set(true);
+  }
 
-  accionModal(datos:ModalData):void{
-    this.modalSubject.next(datos);
+  close():void{
+    this.modalData.set(null);
+    this.isOpen.set(false);
   }
   
 }

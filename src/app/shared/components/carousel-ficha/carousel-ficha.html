@@ -32,4 +32,8 @@
 
     <app-gadget-numero-imagenes class="gadget-numero-imagenes" [numeroImagenes]="imagenes().length" />
 
+    @if(dondeEstoy !== 'inmobiliaria') {
+        <app-gadget-logo-inmobiliaria class="gadget-logo" [datosInmueble]="datos" />
+    }    
+
 </section>

@@ -1,4 +1,4 @@
-import { Inmobiliaria, Operacion, Poblacion, Tipo } from "./entities";
+import { Operacion, Poblacion, Tipo } from "./entities";
 
 export interface Credenciales {
   username: string;
@@ -97,7 +97,7 @@ export interface InmuebleImagenDTO {
     tipo:Tipo;
     operacion:Operacion;
     poblacion:Poblacion;
-    inmobiliaria:Inmobiliaria;
+    inmobiliaria:InmobiliariaImagenDTO;
     activo:number;
     imagenes:Array<ImagenDTO> //ImagenDTO[];
 }

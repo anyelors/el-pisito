@@ -31,8 +31,7 @@ export class CorazonFavoritos implements OnInit {
   modalData:ModalData = {
     titulo:"",
     mensaje:"",
-    imagen:"",
-    accion:""
+    imagen:""
   }
 
   ngOnInit(): void {
@@ -63,17 +62,16 @@ export class CorazonFavoritos implements OnInit {
   addFavorito():void{
     if (this._authService.isLoggedIn()) {
       this._favoritosService.addFavorito(this.usuarioId, this.idInmueble).subscribe({
-        next: (inmueble:InmuebleImagenDTO)=>{
+        next: (inmueble:InmuebleImagenDTO) => {
           this.inmueble = inmueble;
-        },
-        complete:() => {
+
           this.modalData.titulo = "Nuevo Favorito";
           this.modalData.mensaje = `El inmueble situado en la ${this.inmueble.via} ${this.inmueble.nombreVia} de ${this.inmueble.poblacion.nombre} (${this.inmueble.poblacion.provincia.nombre}) con un precio de ${this.inmueble.precio}€ se ha añadido a su lista de favoritos`;
-          this.modalData.imagen = "ok-modal.png"
-          this.modalData.accion = "openModal"
-          this._modalService.accionModal(this.modalData);
-
+          this.modalData.imagen = "ok-modal.png";
+        },
+        complete:() => {
           this.esFavorito.set(true);
+          this._modalService.open(this.modalData);
         }
       });
     } else {
@@ -86,15 +84,14 @@ export class CorazonFavoritos implements OnInit {
       this._favoritosService.deleteFavorito(this.usuarioId, this.idInmueble).subscribe({
         next: (inmueble:InmuebleImagenDTO)=>{
           this.inmueble = inmueble;
-        },
-        complete:() => {
+
           this.modalData.titulo = "Eliminar Favorito";
           this.modalData.mensaje = `El inmueble situado en la ${this.inmueble.via} ${this.inmueble.nombreVia} de ${this.inmueble.poblacion.nombre} (${this.inmueble.poblacion.provincia.nombre}) con un precio de ${this.inmueble.precio}€ ha sido eliminado de su lista de favoritos`;
-          this.modalData.imagen = "ok-modal.png"
-          this.modalData.accion = "openModal"
-          this._modalService.accionModal(this.modalData);
-
+          this.modalData.imagen = "ok-modal.png";
+        },
+        complete:() => {
           this.esFavorito.set(false);
+          this._modalService.open(this.modalData);
         }
       });
     } else {

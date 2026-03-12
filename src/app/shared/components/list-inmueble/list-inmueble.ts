@@ -17,16 +17,16 @@ import { FichaInmueble } from "../ficha-inmueble/ficha-inmueble";
 })
 export class ListInmueble implements OnInit {
 
-  private _inmuebleService:InmuebleService = inject(InmuebleService);
-  private _favoritoService:FavoritosService = inject(FavoritosService);
-  private _authService:AuthService = inject(AuthService);
-  public _controlCargaService:ControlCargaService = inject(ControlCargaService);
+  private _inmuebleService: InmuebleService = inject(InmuebleService);
+  private _favoritoService: FavoritosService = inject(FavoritosService);
+  private _authService: AuthService = inject(AuthService);
+  public _controlCargaService: ControlCargaService = inject(ControlCargaService);
 
-  @Input() dondeEstoy:string;
-  @Input() finderData:FinderData;
-  @Input() idInmobiliaria:number;
-  
-  usuarioId:number|undefined;
+  @Input() dondeEstoy: string;
+  @Input() finderData: FinderData;
+  @Input() idInmobiliaria: number;
+
+  usuarioId: number | undefined;
   inmuebles = signal<InmuebleImagenDTO[]>([]);
 
   ngOnInit(): void {
@@ -36,41 +36,39 @@ export class ListInmueble implements OnInit {
     this._authService.getMe();
     this.usuarioId = this._authService.usuario()?.id;
 
-    if(this.dondeEstoy == "home"){
+    if (this.dondeEstoy == "home") {
       this.getInmueblesPortada();
-    }else if (this.dondeEstoy == "favoritos"){
+    } else if (this.dondeEstoy == "favoritos") {
       this.getInmueblesFavoritos();
-    }else if (this.dondeEstoy == "inmobiliaria"){
+    } else if (this.dondeEstoy == "inmobiliaria") {
       this.getInmueblesInmobiliaria();
-    }else if (this.dondeEstoy == "finder"){
+    } else if (this.dondeEstoy == "finder") {
       this.getInmueblesFinder();
     }
-    
+
   }
 
-  getInmueblesPortada():void{
+  getInmueblesPortada(): void {
 
-      this._inmuebleService.getInmueblesPortada().subscribe({
-        next:(datos:InmuebleImagenDTO[]) => {
-          console.log(datos);
+    this._inmuebleService.getInmueblesPortada().subscribe({
+      next: (datos: InmuebleImagenDTO[]) => {
+        this.inmuebles.set(datos);
+      },
+      complete: () => {
+        this._controlCargaService.faseCarga();
+      }
+    });
 
+  }
+
+  getInmueblesFavoritos(): void {
+
+    if (this.usuarioId) {
+      this._favoritoService.getFavoritosDatos(this.usuarioId).subscribe({
+        next: (datos: InmuebleImagenDTO[]) => {
           this.inmuebles.set(datos);
         },
-        complete:() => {
-          this._controlCargaService.faseCarga();
-        }
-      });
-
-  }
-
-  getInmueblesFavoritos():void{
-
-    if (this.usuarioId){
-      this._favoritoService.getFavoritosDatos(this.usuarioId).subscribe({
-        next:(datos:InmuebleImagenDTO[]) => {
-          console.log(datos);
-        },
-        complete:() => {
+        complete: () => {
           this._controlCargaService.faseCarga();
         }
       })
@@ -80,32 +78,32 @@ export class ListInmueble implements OnInit {
 
   }
 
-  getInmueblesInmobiliaria():void{
+  getInmueblesInmobiliaria(): void {
 
-      this._inmuebleService.getInmueblesInmobiliaria(this.idInmobiliaria).subscribe({
-        next:(datos:InmuebleImagenDTO[]) => {
-          console.log(datos);
-        },
-        complete:() => {
-          this._controlCargaService.faseCarga();
-        }
-      });
+    this._inmuebleService.getInmueblesInmobiliaria(this.idInmobiliaria).subscribe({
+      next: (datos: InmuebleImagenDTO[]) => {
+        this.inmuebles.set(datos);
+      },
+      complete: () => {
+        this._controlCargaService.faseCarga();
+      }
+    });
 
   }
 
-  getInmueblesFinder():void{
+  getInmueblesFinder(): void {
 
+    if (this.finderData.idTipo == 0 || this.finderData.idPoblacion == 0 || this.finderData.idOperacion == 0) {
       this._inmuebleService.getInmueblesFinder(this.finderData.idTipo, this.finderData.idPoblacion, this.finderData.idOperacion).subscribe({
-        next:(datos:InmuebleImagenDTO[]) => {
-          console.log(datos);
+        next: (datos: InmuebleImagenDTO[]) => {
+          this.inmuebles.set(datos);
         },
-        complete:() => {
+        complete: () => {
           this._controlCargaService.faseCarga();
         }
       });
+    }
 
   }
-
-  
 
 }
