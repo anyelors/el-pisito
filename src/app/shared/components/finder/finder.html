@@ -1,12 +1,20 @@
 <section class="contenedor">
-
-<form #form = "ngForm" (submit)="find()" class="formulario">
-
-    <div class="mb-3">
+  @if (_controlCargaService.cargaCompletada()) {
+    <form #form="ngForm" (submit)="find()" class="formulario">
+      <div class="mb-3">
         <label for="poblacion">Población*</label>
-        <select name="poblacion" id="poblacion"></select>
-    </div>
+        <select name="poblacion" id="poblacion">
+          <option value="">Seleccione un país</option>
 
-</form>
-
+          @for (poblacion of poblaciones(); track poblacion.id) {
+            <option [value]="poblacion.id">
+              {{ poblacion.nombre }}
+            </option>
+          }
+        </select>
+      </div>
+    </form>
+  } @else {
+    <app-preloader />
+  }
 </section>

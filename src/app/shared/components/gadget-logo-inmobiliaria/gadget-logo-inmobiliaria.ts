@@ -10,8 +10,6 @@ import { RouterLink } from "@angular/router";
   styleUrl: './gadget-logo-inmobiliaria.css',
 })
 export class GadgetLogoInmobiliaria implements OnInit {
-  
-  
 
   @Input() datosInmueble:InmuebleImagenDTO;
   url:string;
