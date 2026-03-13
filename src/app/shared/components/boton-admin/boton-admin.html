@@ -1,1 +1,7 @@
-<p>boton-admin works!</p>
+<nav class="contenedor" [routerLink]="['/admin/edit-inmueble', idInmueble]">
+    @if (_authService.usuario()?.rol === "ROLE_ADMIN") {
+        <div class="admin"><i class="fa-solid fa-user-gear"></i></div>
+    }@else if (_authService.usuario()?.rol === "ROLE_SUPERADMIN") {
+        <div class="admin"><i class="fa-solid fa-user-plus"></i></div>
+    }
+</nav>

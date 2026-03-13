@@ -2,10 +2,16 @@
 
     @if(_controlCargaService.cargaCompletada()){
         
-        @for (inmueble of inmuebles(); track inmueble.id) {
-            
-            <app-ficha-inmueble [datos]="inmueble" [dondeEstoy]="dondeEstoy"/>
-            
+        @if(inmuebles().length > 0) {
+            @for (inmueble of inmuebles(); track inmueble.id) {
+                
+                <app-ficha-inmueble [datos]="inmueble" [dondeEstoy]="dondeEstoy"/>
+                
+            }
+        }@else {
+            @if(dondeEstoy != 'home') {
+                <app-no-inmueble/>
+            }
         }
 
     }@else {

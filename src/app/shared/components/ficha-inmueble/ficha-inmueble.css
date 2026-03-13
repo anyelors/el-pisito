@@ -91,7 +91,7 @@
 }
 
 .claim{
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: var(--azul-logo);
 }
 
@@ -122,6 +122,10 @@
         flex-direction: row;
     }
 
+    .datos-generales{
+        justify-content: flex-end;
+    }
+
 }
 
 
@@ -133,6 +137,7 @@
         line-clamp: 6;
         -webkit-line-clamp: 6;
     }
+
 
 }
 

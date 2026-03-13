@@ -1,18 +1,60 @@
 <section class="contenedor">
   @if (_controlCargaService.cargaCompletada()) {
+
     <form #form="ngForm" (submit)="find()" class="formulario">
+
+      <h6 class="titulo-busqueda">
+        <span>BUSCA TU INMUEBLE!!!</span>
+        <div>
+          <img src="assets/img/el-pisito.svg" class="imagen-logo">
+          <img src="assets/img/el-pisito.svg" class="imagen-logo1">
+          <img src="assets/img/el-pisito.svg" class="imagen-logo2">
+        </div>
+      </h6>
+
       <div class="mb-3">
-        <label for="poblacion">Población*</label>
-        <select name="poblacion" id="poblacion">
-          <option value="">Seleccione un país</option>
+        <label for="poblacion">POBLACIÓN*</label>
+        <select name="poblacion" id="poblacion" class="form-select" required [(ngModel)]="idPoblacion">
+          <option value="0">Seleccione una población</option>
 
           @for (poblacion of poblaciones(); track poblacion.id) {
             <option [value]="poblacion.id">
-              {{ poblacion.nombre }}
+              {{ poblacion.nombre }} ({{ poblacion.provincia.nombre }})
             </option>
           }
         </select>
       </div>
+
+      <div class="mb-3">
+        <label for="tipo">TIPO*</label>
+        <select name="tipo" id="tipo" class="form-select" required [(ngModel)]="idTipo">
+          <option value="0">Seleccione un tipo inmueble</option>
+
+          @for (tipo of tipo(); track tipo.id) {
+            <option [value]="tipo.id">
+              {{ tipo.nombre }}
+            </option>
+          }
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="operacion">OPERACIÓN*</label>
+        <select name="operacion" id="operacion" class="form-select" required [(ngModel)]="idOperacion">
+          <option value="0">Seleccione una operación</option>
+
+          @for (operacion of operacion(); track operacion.id) {
+            <option [value]="operacion.id">
+              {{ operacion.nombre }}
+            </option>
+          }
+        </select>
+      </div>
+
+      <div class="contenedor-boton">
+        <button type="submit" class="btn btn-sm btn-primary" [disabled]="form.invalid">Buscar Inmuebles</button>
+      </div>
+    
     </form>
   } @else {
     <app-preloader />

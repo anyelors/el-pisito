@@ -7,10 +7,11 @@ import { FinderData } from '../../../core/models/auxiliares';
 import { Preloader } from "../preloader/preloader";
 import { ControlCargaService } from '../../../core/services/control-carga-service';
 import { FichaInmueble } from "../ficha-inmueble/ficha-inmueble";
+import { NoInmueble } from "../no-inmueble/no-inmueble";
 
 @Component({
   selector: 'app-list-inmueble',
-  imports: [Preloader, FichaInmueble],
+  imports: [Preloader, FichaInmueble, NoInmueble],
   providers: [ControlCargaService],
   templateUrl: './list-inmueble.html',
   styleUrl: './list-inmueble.css'
@@ -93,7 +94,7 @@ export class ListInmueble implements OnInit {
 
   getInmueblesFinder(): void {
 
-    if (this.finderData.idTipo == 0 || this.finderData.idPoblacion == 0 || this.finderData.idOperacion == 0) {
+    if (this.finderData.idTipo != 0 && this.finderData.idPoblacion != 0 && this.finderData.idOperacion != 0) {
       this._inmuebleService.getInmueblesFinder(this.finderData.idTipo, this.finderData.idPoblacion, this.finderData.idOperacion).subscribe({
         next: (datos: InmuebleImagenDTO[]) => {
           this.inmuebles.set(datos);

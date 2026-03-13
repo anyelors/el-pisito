@@ -6,6 +6,7 @@ import { TipoService } from '../../../core/services/tipo-service';
 import { ControlCargaService } from '../../../core/services/control-carga-service';
 import { Preloader } from "../preloader/preloader";
 import { Operacion, Poblacion, Tipo } from '../../../core/models/entities';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-finder',
@@ -15,25 +16,29 @@ import { Operacion, Poblacion, Tipo } from '../../../core/models/entities';
   styleUrl: './finder.css',
 })
 export class Finder implements OnInit {
- 
+
   public _controlCargaService: ControlCargaService = inject(ControlCargaService);
-  public _poblacionService:PoblacionService = inject(PoblacionService);
-  public _operacionService:OperacionService = inject(OperacionService);
-  public _tipoService:TipoService = inject(TipoService);
+  public _poblacionService: PoblacionService = inject(PoblacionService);
+  public _operacionService: OperacionService = inject(OperacionService);
+  public _tipoService: TipoService = inject(TipoService);
+  private _router:Router = inject(Router);
 
   poblaciones = signal<Poblacion[]>([]);
   operacion = signal<Operacion[]>([]);
   tipo = signal<Tipo[]>([]);
 
+  idTipo: number = 0;
+  idPoblacion: number = 0;
+  idOperacion: number = 0;
+
   ngOnInit(): void {
     this._controlCargaService.nFases.set(1);
-
-    this.getPoblaciones();
+    this.getDatos();
   }
 
-    getPoblaciones(): void {
-    this._poblacionService.getPoblaciones().subscribe({
-      next: (datos:Poblacion[]) => {
+  getDatos(): void {
+    this._poblacionService.getPoblacionesActivas(1).subscribe({
+      next: (datos: Poblacion[]) => {
         console.log(datos);
         this.poblaciones.set(datos);
       },
@@ -41,10 +46,31 @@ export class Finder implements OnInit {
         this._controlCargaService.faseCarga();
       }
     });
+
+    this._operacionService.getOperacionesActivas(1).subscribe({
+      next: (datos: Operacion[]) => {
+        console.log(datos);
+        this.operacion.set(datos);
+      },
+      complete: () => {
+        this._controlCargaService.faseCarga();
+      }
+    });
+
+    this._tipoService.getTiposActivos(1).subscribe({
+      next: (datos: Tipo[]) => {
+        console.log(datos);
+        this.tipo.set(datos);
+      },
+      complete: () => {
+        this._controlCargaService.faseCarga();
+      }
+    });
+
   }
 
   find(): void {
-    console.log('find');
+    this._router.navigate(['/finder', this.idTipo, this.idPoblacion, this.idOperacion]);
   }
 
 }

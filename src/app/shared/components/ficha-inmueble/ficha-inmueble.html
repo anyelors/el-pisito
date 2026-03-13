@@ -35,7 +35,7 @@
     </div>
 
     @if (_authService.isLoggedIn() && (_authService.usuario()?.rol === "ROLE_SUPERADMIN" || _authService.usuario()?.rol === "ROLE_ADMIN")) {
-        <app-boton-admin [idInmueble]="datos.id"/>
+        <app-boton-admin class="boton-admin" [idInmueble]="datos.id"/>
     }
     
     <app-corazon-favoritos class="corazon-favoritos" [idInmueble]="datos.id"/>
