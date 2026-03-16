@@ -29,7 +29,7 @@ export const CONTENT_ROUTES = [
     }
     ,
     {
-        path: 'consulta-hipoteca',
+        path: 'consultor-hipotecas',
         component: ConsultorHipotecas
     }
     ,

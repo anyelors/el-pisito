@@ -1,1 +1,7 @@
-<p>contenedor-banners works!</p>
+<section class="contenedor">
+
+    @for (banner of banners(); track banner.id) {
+        <app-banner [banner]="banner" />
+    }
+
+</section>

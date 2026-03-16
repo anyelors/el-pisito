@@ -1,7 +1,7 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ListInmueble } from "../../../shared/components/list-inmueble/list-inmueble";
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { map, Subscription, switchMap } from 'rxjs';
 import { InmobiliariaService } from '../../../core/services/inmobiliaria-service';
 import { InmobiliariaImagenDTO } from '../../../core/models/dtos';
 import { ControlCargaService } from '../../../core/services/control-carga-service';
@@ -38,24 +38,16 @@ export class Inmobiliaria implements OnInit, OnDestroy{
 
   getDatos():void {
 
-    this.suscripcion = this._router.params.subscribe({
-      next:(params) => {
-        this.idInmobiliaria = params['id'];
-      }
-    });
-
-    this._inmobiliariaService.getInmobiliaria(this.idInmobiliaria).subscribe({
-      next:(datos:InmobiliariaImagenDTO) => {
-        console.log(datos);
-        this.inmobiliaria = datos;
-      },
-        complete:() => {
+    this.suscripcion = this._router.paramMap.pipe(
+      map( params => this.idInmobiliaria = Number(params.get('id' ))),
+      switchMap( id => this._inmobiliariaService.getInmobiliaria(this.idInmobiliaria) )
+    ).subscribe({
+        next:(datos:InmobiliariaImagenDTO) => {
+          this.inmobiliaria = datos;
           this.url = `${URL_MEDIA}${this.inmobiliaria.imagenes[0].url}`;
           this.alt = this.inmobiliaria.imagenes[0].alt;
           this._controlCargaService.faseCarga();
         }
-    });
-
+      });
   }
-
 }

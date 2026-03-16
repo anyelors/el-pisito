@@ -1,12 +1,18 @@
-<section class="contenedor">
+<section class="contenedor" routerLink="/{{ banner.link }}">
 
     <div>
-        <img src="" alt="">
+        @if(imagenes()[0].url === '' || imagenes()[0].url === null || imagenes()[0].url === undefined) {
+            <img src="assets/img/no-banner-c.jpg" class="imagen">
+        } @else {
+            <img [src]="urlMedia + imagenes()[0].url" [alt]="urlMedia + imagenes()[0].alt" class="imagen">
+        }
+
+        <img src="assets/img/el-pisito.svg" class="logito">
     </div>
 
-    <div>
-        <h3>titular</h3>
-        <p>claim</p>
+    <div class="texto">
+        <h3>{{ banner.titular }}</h3>
+        <p>{{ banner.claim }}</p>
     </div>
 
 </section>
