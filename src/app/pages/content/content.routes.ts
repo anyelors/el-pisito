@@ -2,6 +2,7 @@ import { adminGuard } from "../../core/guards/admin-guard";
 import { baseGuard } from "../../core/guards/base-guard";
 import { ConsultorHipotecas } from "./consultor-hipotecas/consultor-hipotecas";
 import { Contacto } from "./contacto/contacto";
+import { DetailInmueble } from "./detail-inmueble/detail-inmueble";
 import { ErrorGeneral } from "./error-general/error-general";
 import { FavoritosUsuario } from "./favoritos-usuario/favoritos-usuario";
 import { Home } from "./home/home";
@@ -64,6 +65,10 @@ export const CONTENT_ROUTES = [
     {
         path: 'inmobiliaria/:id',
         component: Inmobiliaria
+    },
+    {
+        path: 'detail-inmueble/:id',
+        component: DetailInmueble
     },
     {
         path: 'error',

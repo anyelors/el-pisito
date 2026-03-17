@@ -50,4 +50,5 @@ export class Inmobiliaria implements OnInit, OnDestroy{
         }
       });
   }
+  
 }

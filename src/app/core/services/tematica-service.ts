@@ -31,6 +31,10 @@ export class TematicaService {
     return this._http.put<Tematica>(`${URL_API}tematica`,tematica);
   }
 
+  updateActualizarTematica(id:number):Observable<Tematica> {
+    return this._http.put<Tematica>(`${URL_API}actualizar-tematica/${id}`, null);
+  }
+
   getTematicaActual():Observable<Tematica> {
     return this._http.get<Tematica>(`${URL_API}tematica-actual`);
   }

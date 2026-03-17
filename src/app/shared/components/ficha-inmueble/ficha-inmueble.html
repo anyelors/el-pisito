@@ -5,7 +5,7 @@
 
     </header>
 
-    <div class="datos-generales">
+    <div class="datos-generales" [routerLink]="['/detail-inmueble', datos.id]">
 
         <header class="cabecera-datos">
             <h3 class="claim">{{datos.claim}} {{datos.poblacion.nombre}}</h3>

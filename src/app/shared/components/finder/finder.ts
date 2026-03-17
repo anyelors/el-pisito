@@ -39,7 +39,6 @@ export class Finder implements OnInit {
   getDatos(): void {
     this._poblacionService.getPoblacionesActivas(1).subscribe({
       next: (datos: Poblacion[]) => {
-        console.log(datos);
         this.poblaciones.set(datos);
       },
       complete: () => {
@@ -49,7 +48,6 @@ export class Finder implements OnInit {
 
     this._operacionService.getOperacionesActivas(1).subscribe({
       next: (datos: Operacion[]) => {
-        console.log(datos);
         this.operacion.set(datos);
       },
       complete: () => {
@@ -59,7 +57,6 @@ export class Finder implements OnInit {
 
     this._tipoService.getTiposActivos(1).subscribe({
       next: (datos: Tipo[]) => {
-        console.log(datos);
         this.tipo.set(datos);
       },
       complete: () => {
