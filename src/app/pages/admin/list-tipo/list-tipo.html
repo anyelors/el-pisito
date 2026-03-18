@@ -1,6 +1,5 @@
 <div class="contenedor-listado">
 
-
     <h1>Listado de tipos</h1>
 
     @if(!cargaCompletada()){
@@ -12,6 +11,7 @@
             <table class="table">
 
                 <thead>
+                    
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">TIPO</th>
@@ -41,15 +41,12 @@
                                 <i class="fa-solid fa-xmark"></i>
                             }
                            
-                        
                             </td>
 
                             <td><button type="button" class="btn btn-success btn-sn" [routerLink]="['/admin/edit-tipo', dato.id ]">Editar</button></td>
 
-
                         </tr>
                     }
-
 
                 </tbody>
 
@@ -58,6 +55,5 @@
         </div>
 
     }   
-
 
 </div>

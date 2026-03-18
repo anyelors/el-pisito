@@ -30,9 +30,7 @@ export class ListTipo implements OnInit {
       complete: () => { this.cargaCompletada.set(true); }
     });
 
-
   }
-
 
 }
 

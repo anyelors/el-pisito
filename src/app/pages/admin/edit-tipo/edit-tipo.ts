@@ -12,7 +12,7 @@ import { Preloader } from "../../../shared/components/preloader/preloader";
   templateUrl: './edit-tipo.html',
   styleUrl: './edit-tipo.css',
 })
-export class EditTipo  implements OnInit, OnDestroy{
+export class EditTipo implements OnInit, OnDestroy{
 
   private _tipoService:TipoService=inject(TipoService);
   private _router:ActivatedRoute = inject(ActivatedRoute);
@@ -39,13 +39,12 @@ export class EditTipo  implements OnInit, OnDestroy{
       switchMap( id => this._tipoService.getTipo(this.id) )
     ).subscribe({
       next:(datos:Tipo) => {
-        this.tipo = datos
+        this.tipo = datos;
         this.cargaCompletada.set(true);
       }
     });
 
   }
-
 
   edit():void{
 
@@ -59,11 +58,7 @@ export class EditTipo  implements OnInit, OnDestroy{
 
     });
 
-
-
-
   }
-
 
 }
 

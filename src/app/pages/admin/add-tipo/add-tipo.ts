@@ -26,7 +26,7 @@ export class AddTipo {
       this.tipo.nombre = this.tipo.nombre.toUpperCase();
 
       this._tipoService.addTipo(this.tipo).subscribe({
-        next: (datos) => {},
+        next: (datos:Tipo) => {},
         complete: () => { this._router.navigate(["/admin/list-tipo"]); }
       });
 

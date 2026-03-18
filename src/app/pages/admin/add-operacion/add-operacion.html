@@ -1,1 +1,24 @@
-<p>add-operacion works!</p>
+<section class="contenedor">
+
+    <h1>+Operación</h1>
+
+    <div class="contenedor-formulario">
+
+        <form #form="ngForm" class="formulario" (ngSubmit)="add()">
+
+            <div class="mb-3">
+                <label for="operacion">OPERACIÓN*</label>
+                <input type="text" id="operacion" name="operacion" required class="form-control" style="text-transform: uppercase;"  autocomplete="off" [(ngModel)]="operacion.nombre">
+            </div>
+
+            <div class="contenedor-boton">
+
+                <button class="btn btn-md btn-primary" type="submit" [disabled]="form.invalid">+Operacion</button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>

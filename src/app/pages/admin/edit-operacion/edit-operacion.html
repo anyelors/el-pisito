@@ -1,1 +1,42 @@
-<p>edit-operacion works!</p>
+<section class="contenedor">
+
+    <h1>Editar tipo</h1>
+
+    @if(!cargaCompletada()){
+        <app-preloader/>
+    }@else {
+
+        <div class="contenedor-formulario">
+
+
+            <form  #form="ngForm" class="formulario" (ngSubmit)="edit()">
+
+                <p class="id-form mb-3">ID: {{operacion.id}}</p>
+
+                <div class="checkbox-alineado mb-3">
+
+                    <label for="activo" class="me-2 cursor-check">ACTIVO</label>
+                    <input type="checkbox" id="activo" name="activo" class="form-check-input cursor-check" [(ngModel)]="operacion.activo">
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label for="operacion">OPERACIÓN*:</label>
+                    <input type="text" id="operacion" name="operacion" required class="form-control" autocomplete="off" style="text-transform:uppercase"  [(ngModel)]="operacion.nombre">
+
+                </div>
+
+                <div class="contenedor-boton">
+
+                    <button class="btn btn-md btn-primary" type="submit" [disabled] = "form.invalid" >Modificar</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    }
+
+</section>
+
