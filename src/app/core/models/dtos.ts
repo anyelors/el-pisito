@@ -1,4 +1,4 @@
-import { Operacion, Poblacion, Tipo } from "./entities";
+import { BannerCarousel, Operacion, Poblacion, Tipo } from "./entities";
 
 export interface Credenciales {
   username: string;
@@ -7,6 +7,15 @@ export interface Credenciales {
 
 export interface CredencialesRespuesta {
   mensaje:any;
+}
+
+export interface TematicaDTO {
+    id?:number;
+    nombre:string;
+    actual?:number;
+    activo?:number;
+    bannersCarousel:BannerCarousel[];
+    nroBanners?:number;
 }
 
 export interface BannerCarouselIdDTO {

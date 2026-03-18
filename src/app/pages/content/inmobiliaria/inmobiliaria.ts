@@ -1,17 +1,16 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { ListInmueble } from "../../../shared/components/list-inmueble/list-inmueble";
 import { ActivatedRoute } from '@angular/router';
 import { map, Subscription, switchMap } from 'rxjs';
 import { InmobiliariaService } from '../../../core/services/inmobiliaria-service';
 import { InmobiliariaImagenDTO } from '../../../core/models/dtos';
-import { ControlCargaService } from '../../../core/services/control-carga-service';
 import { Preloader } from "../../../shared/components/preloader/preloader";
 import { URL_MEDIA } from '../../../core/environments/globals';
 
 @Component({
   selector: 'app-inmobiliaria',
   imports: [ListInmueble, Preloader],
-  providers: [ControlCargaService],
+  providers: [],
   templateUrl: './inmobiliaria.html',
   styleUrl: './inmobiliaria.css',
 })
@@ -19,8 +18,8 @@ export class Inmobiliaria implements OnInit, OnDestroy{
 
   private _router:ActivatedRoute = inject(ActivatedRoute);
   private _inmobiliariaService = inject(InmobiliariaService);
-  public _controlCargaService = inject(ControlCargaService);
 
+  cargaCompletada = signal<boolean>(false);
   idInmobiliaria:number;
   inmobiliaria:InmobiliariaImagenDTO;
   suscripcion:Subscription;
@@ -28,7 +27,6 @@ export class Inmobiliaria implements OnInit, OnDestroy{
   alt:string;
 
   ngOnInit(): void {
-    this._controlCargaService.nFases.set(1);
     this.getDatos();
   }
 
@@ -46,7 +44,7 @@ export class Inmobiliaria implements OnInit, OnDestroy{
           this.inmobiliaria = datos;
           this.url = `${URL_MEDIA}${this.inmobiliaria.imagenes[0].url}`;
           this.alt = this.inmobiliaria.imagenes[0].alt;
-          this._controlCargaService.faseCarga();
+          this.cargaCompletada.set(true);
         }
       });
   }

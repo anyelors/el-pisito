@@ -109,5 +109,4 @@ export interface Tematica {
     nombre:string;
     actual?:number;
     activo?:number;
-    numeroBanners?:number;
 }

@@ -15,7 +15,7 @@
                     'active': i === 0
                 }">
                 
-                    <img [src]="urlMedia +  banner.imagenes[i].url" class="d-block w-100" [alt]="urlMedia + banner.imagenes[i].alt">
+                    <img [src]= "urlMedia + banner.imagenes[0].url" class="d-block w-100" [alt]= "urlMedia + banner.imagenes[0].alt">
 
                     @if(i === 0) {
                         <img class="logo" src="assets/img/elpisito-logo-carousel.png" alt="">

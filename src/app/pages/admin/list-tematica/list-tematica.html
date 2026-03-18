@@ -7,8 +7,6 @@
         <app-preloader/>
     }@else {
 
-        @if(cargaCompletadaTable()){
-
         <div class="contenedor-tabla">
 
             <table class="table">
@@ -19,7 +17,7 @@
                         <th scope="col">TEMATICA</th>
                         <th scope="col" class="centrar-actual">ACTUAL</th>
                         <th scope="col" class="centrar-activo">ACTIVO</th>
-                        <th scope="col">NUM.BANNERS</th>
+                        <th scope="col" class="centrar-numero-banners">NUM.BANNERS</th>
                         <th scope="col">EDITAR</th>
 
                     </tr>
@@ -38,31 +36,27 @@
                                 'item-actual': dato.actual == 1,
                                 'item-noactual': dato.actual == 0
 
-                            }">
-                            @if(dato.actual == 1){
-                                <i class="fa-solid fa-check"></i>
-                            }@else {
-                                <i class="fa-solid fa-xmark"></i>
-                            }
-
-
+                                }">
+                                @if(dato.actual == 1){
+                                    <i class="fa-solid fa-check"></i>
+                                }@else {
+                                    <i class="fa-solid fa-xmark"></i>
+                                }
                             </td>
                            <td [ngClass] = "{
 
                                 'item-activo': dato.activo == 1,
                                 'item-inactivo': dato.activo === 0
 
-                            }">
-                            @if(dato.activo == 1){
-                                <i class="fa-solid fa-check"></i>
-                            }@else {
-                                <i class="fa-solid fa-xmark"></i>
-                            }
-
-
+                                }">
+                                @if(dato.activo == 1){
+                                    <i class="fa-solid fa-check"></i>
+                                }@else {
+                                    <i class="fa-solid fa-xmark"></i>
+                                }
                             </td>
 
-                            <td class="centrar-numero-banners">{{dato.numeroBanners}}</td>
+                            <td class="centrar-numero-banners">{{dato.nroBanners}}</td>
 
                             <td><button type="button" class="btn btn-success btn-sn" [routerLink]="['/admin/edit-tematica', dato.id ]">Editar</button></td>
 
@@ -77,8 +71,6 @@
 
 
         </div>
-    }
-
 
     }
 

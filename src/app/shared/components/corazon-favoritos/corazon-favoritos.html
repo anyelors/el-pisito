@@ -1,6 +1,6 @@
 <section class="contenedor">
 
-    @if (_authService.isLoggedIn() && _controlCargaService.cargaCompletada()) {
+    @if (cargaCompletada()) {
 
         @if (esFavorito()) {
             <i class="fa-solid fa-heart" (click)="deleteFavorito()"></i>

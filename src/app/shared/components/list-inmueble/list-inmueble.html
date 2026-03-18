@@ -1,6 +1,6 @@
 <section class="contenedor">
 
-    @if(_controlCargaService.cargaCompletada()){
+    @if(cargaCompletada()){
         
         @if(inmuebles().length > 0) {
             @for (inmueble of inmuebles(); track inmueble.id) {

@@ -214,6 +214,15 @@ td, th{
 	background-color: var(--amarillo-logo);
 	color: white;
 }
+
+.checkbox-alineado{
+	display: flex;
+	align-items: center;
+}
+
+.checkbox-alineado input{
+	margin-top: 0;
+}
 /* ==================================================================================== */
 /* FIN FORMULARIOS */
 /* ==================================================================================== */

@@ -19,7 +19,7 @@ import { ContenedorBanners } from "../../../shared/components/contenedor-banners
 
 @Component({
   selector: 'app-detail-inmueble',
-  imports: [Preloader, BotonAdmin, CarouselFicha, EurosPipe, ParentesisPipe, MetrosCuadradosPipe, MinusculasPipe, PlazasPipe, SiNoPipe, AmuebladoPipe, CorazonFavoritos, ContenedorBanners],
+  imports: [Preloader, BotonAdmin, CarouselFicha, EurosPipe, ParentesisPipe, MetrosCuadradosPipe, MinusculasPipe, PlazasPipe, SiNoPipe, AmuebladoPipe, CorazonFavoritos],
   templateUrl: './detail-inmueble.html',
   styleUrl: './detail-inmueble.css',
 })

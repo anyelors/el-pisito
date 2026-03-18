@@ -5,14 +5,13 @@ import { FavoritosService } from '../../../core/services/favoritos-service';
 import { AuthService } from '../../../core/services/auth-service';
 import { FinderData } from '../../../core/models/auxiliares';
 import { Preloader } from "../preloader/preloader";
-import { ControlCargaService } from '../../../core/services/control-carga-service';
 import { FichaInmueble } from "../ficha-inmueble/ficha-inmueble";
 import { NoInmueble } from "../no-inmueble/no-inmueble";
 
 @Component({
   selector: 'app-list-inmueble',
   imports: [Preloader, FichaInmueble, NoInmueble],
-  providers: [ControlCargaService],
+  providers: [],
   templateUrl: './list-inmueble.html',
   styleUrl: './list-inmueble.css'
 })
@@ -21,18 +20,15 @@ export class ListInmueble implements OnInit {
   private _inmuebleService: InmuebleService = inject(InmuebleService);
   private _favoritoService: FavoritosService = inject(FavoritosService);
   private _authService: AuthService = inject(AuthService);
-  public _controlCargaService: ControlCargaService = inject(ControlCargaService);
 
+  cargaCompletada = signal<boolean>(false);
+  usuarioId: number | undefined;
+  inmuebles = signal<InmuebleImagenDTO[]>([]);
   @Input() dondeEstoy: string;
   @Input() finderData: FinderData;
   @Input() idInmobiliaria: number;
 
-  usuarioId: number | undefined;
-  inmuebles = signal<InmuebleImagenDTO[]>([]);
-
   ngOnInit(): void {
-
-    this._controlCargaService.nFases.set(1);
 
     this._authService.getMe();
     this.usuarioId = this._authService.usuario()?.id;
@@ -54,9 +50,7 @@ export class ListInmueble implements OnInit {
     this._inmuebleService.getInmueblesPortada().subscribe({
       next: (datos: InmuebleImagenDTO[]) => {
         this.inmuebles.set(datos);
-      },
-      complete: () => {
-        this._controlCargaService.faseCarga();
+        this.cargaCompletada.set(true);
       }
     });
 
@@ -68,9 +62,7 @@ export class ListInmueble implements OnInit {
       this._favoritoService.getFavoritosDatos(this.usuarioId).subscribe({
         next: (datos: InmuebleImagenDTO[]) => {
           this.inmuebles.set(datos);
-        },
-        complete: () => {
-          this._controlCargaService.faseCarga();
+          this.cargaCompletada.set(true);
         }
       })
     } else {
@@ -84,9 +76,7 @@ export class ListInmueble implements OnInit {
     this._inmuebleService.getInmueblesInmobiliaria(this.idInmobiliaria).subscribe({
       next: (datos: InmuebleImagenDTO[]) => {
         this.inmuebles.set(datos);
-      },
-      complete: () => {
-        this._controlCargaService.faseCarga();
+        this.cargaCompletada.set(true);
       }
     });
 
@@ -98,9 +88,7 @@ export class ListInmueble implements OnInit {
       this._inmuebleService.getInmueblesFinder(this.finderData.idTipo, this.finderData.idPoblacion, this.finderData.idOperacion).subscribe({
         next: (datos: InmuebleImagenDTO[]) => {
           this.inmuebles.set(datos);
-        },
-        complete: () => {
-          this._controlCargaService.faseCarga();
+          this.cargaCompletada.set(true);
         }
       });
     }

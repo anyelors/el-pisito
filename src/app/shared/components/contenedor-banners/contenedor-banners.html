@@ -1,7 +1,9 @@
 <section class="contenedor">
-
-    @for (banner of banners(); track banner.id) {
-        <app-banner [banner]="banner" />
+    
+    @if (cargaCompletada()) {
+        @for (banner of banners(); track banner.id) {
+            <app-banner [banner]="banner" />
+        }
     }
 
 </section>

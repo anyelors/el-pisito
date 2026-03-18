@@ -35,14 +35,14 @@ export class EditTematica {
   getDatos():void{
 
     this.suscripcion = this._router.paramMap.pipe(
-        map( params => this.id = Number(params.get('id' ))),
+        map( params => this.id = Number(params.get('id'))),
         switchMap( id => this._tematicaService.getTematica(this.id) )
       ).subscribe({
-          next:(datos:Tematica) => {
-            this.tematica = datos
-            this.cargaCompletada.set(true);
-          }
-        });
+        next:(datos:Tematica) => {
+          this.tematica = datos
+          this.cargaCompletada.set(true);
+        }
+      });
 
   }
 
@@ -54,9 +54,7 @@ export class EditTematica {
 
     this._tematicaService.updateTematica(this.tematica).subscribe({
 
-      next: (datos) => {
-
-      },
+      next: (datos) => {},
       complete: () => { this._routerR.navigate(["/admin/list-tematica"]) }
 
     });

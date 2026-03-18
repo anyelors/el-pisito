@@ -3,14 +3,13 @@ import { Router, RouterLink } from "@angular/router";
 import { AuthService } from '../../../core/services/auth-service';
 import { FavoritosService } from '../../../core/services/favoritos-service';
 import { InmuebleIdDTO, InmuebleImagenDTO } from '../../../core/models/dtos';
-import { ControlCargaService } from '../../../core/services/control-carga-service';
 import { ModalData } from '../../../core/models/auxiliares';
 import { ModalService } from '../../../core/services/modal-service';
 
 @Component({
   selector: 'app-corazon-favoritos',
   imports: [RouterLink],
-  providers: [ControlCargaService],
+  providers: [],
   templateUrl: './corazon-favoritos.html',
   styleUrl: './corazon-favoritos.css',
 })
@@ -18,10 +17,10 @@ export class CorazonFavoritos implements OnInit {
     
   public _authService:AuthService = inject(AuthService);
   private _favoritosService:FavoritosService = inject(FavoritosService);
-  public _controlCargaService:ControlCargaService = inject(ControlCargaService)
   private _router:Router = inject(Router);
   private _modalService:ModalService = inject(ModalService);
 
+  cargaCompletada = signal<boolean>(false);
   esFavorito = signal<boolean>(false);
   inmueble:InmuebleImagenDTO;
   inmueblesFavoritos:InmuebleIdDTO[] = [];
@@ -35,14 +34,10 @@ export class CorazonFavoritos implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this._controlCargaService.nFases.set(1);
     
     if (this._authService.isLoggedIn()) {
       this.usuarioId = this._authService.usuario()!.id;
       this.getFavoritos();
-    } else {
-      this._controlCargaService.faseCarga();
     }
     
   }
@@ -52,9 +47,7 @@ export class CorazonFavoritos implements OnInit {
       next: (idInmuebles:InmuebleIdDTO[]) => {
         this.inmueblesFavoritos = idInmuebles;
         this.esFavorito.set( this.inmueblesFavoritos.some( f => f.id === this.idInmueble ) );
-      },
-      complete: () => {
-        this._controlCargaService.faseCarga();
+        this.cargaCompletada.set(true);
       }
     });
   }
