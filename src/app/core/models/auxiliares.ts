@@ -9,3 +9,10 @@ export interface ModalData {
     mensaje?:string;
     imagen?:string;
 }
+
+export enum EntidadImagen {
+    INMOBILIARIA = 'INMOBILIARIA',
+    INMUEBLE = 'INMUEBLE',
+    BANNER = 'BANNER',
+    BANNER_CAROUSEL = 'BANNER_CAROUSEL'
+}

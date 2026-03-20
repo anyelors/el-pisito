@@ -3,12 +3,12 @@ import { OperacionService } from '../../../core/services/operacion-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Operacion } from '../../../core/models/entities';
 import { map, Subscription, switchMap } from 'rxjs';
-import { Preloader } from "../../../shared/components/preloader/preloader";
 import { FormsModule } from '@angular/forms';
+import { Preloader } from "../../../shared/components/preloader/preloader";
 
 @Component({
   selector: 'app-edit-operacion',
-  imports: [Preloader, FormsModule],
+  imports: [FormsModule, Preloader],
   templateUrl: './edit-operacion.html',
   styleUrl: './edit-operacion.css',
 })

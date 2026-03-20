@@ -1,7 +1,6 @@
 import { adminGuard } from "../../core/guards/admin-guard";
 import { baseGuard } from "../../core/guards/base-guard";
 import { superadminGuard } from "../../core/guards/superadmin-guard";
-import { usuarioGuard } from "../../core/guards/usuario-guard";
 import { AddBannerCarousel } from "./add-banner-carousel/add-banner-carousel";
 import { AddBanner } from "./add-banner/add-banner";
 import { AddInmobiliaria } from "./add-inmobiliaria/add-inmobiliaria";

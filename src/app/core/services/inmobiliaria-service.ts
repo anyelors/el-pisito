@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { InmobiliariaImagenDTO } from '../models/dtos';
 import { Observable } from 'rxjs';
 import { URL_API } from '../environments/globals';
-import { Inmobiliaria } from '../../pages/content/inmobiliaria/inmobiliaria';
+import { Inmobiliaria } from '../models/entities';
 
 @Injectable({
   providedIn: 'root',
@@ -24,12 +24,12 @@ export class InmobiliariaService {
     return this._http.get<InmobiliariaImagenDTO>(`${URL_API}inmobiliaria/${id}`);
   }
 
-  addInmobiliaria(inmueble:Inmobiliaria):Observable<InmobiliariaImagenDTO> {
-    return this._http.post<InmobiliariaImagenDTO>(`${URL_API}inmobiliaria`,inmueble);
+  addInmobiliaria(inmobiliaria:Inmobiliaria):Observable<InmobiliariaImagenDTO> {
+    return this._http.post<InmobiliariaImagenDTO>(`${URL_API}inmobiliaria`,inmobiliaria);
   }
 
-  updateInmobiliaria(inmueble:Inmobiliaria):Observable<InmobiliariaImagenDTO> {
-    return this._http.put<InmobiliariaImagenDTO>(`${URL_API}inmobiliaria`,inmueble);
+  updateInmobiliaria(inmobiliaria:Inmobiliaria):Observable<InmobiliariaImagenDTO> {
+    return this._http.put<InmobiliariaImagenDTO>(`${URL_API}inmobiliaria`,inmobiliaria);
   }
   
 }

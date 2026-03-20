@@ -1,6 +1,6 @@
 <div class="contenedor-listado">
 
-    <h1>Listado de tipos</h1>
+    <h1>Listado de provincias</h1>
 
     @if(!cargaCompletada()){
         <app-preloader/>
@@ -39,16 +39,13 @@
                             }@else {
                                 <i class="fa-solid fa-xmark"></i>
                             }
-                           
                         
                             </td>
 
                             <td><button type="button" class="btn btn-success btn-sn" [routerLink]="['/admin/edit-provincia', dato.id ]">Editar</button></td>
 
-
                         </tr>
                     }
-
 
                 </tbody>
 
@@ -57,6 +54,5 @@
         </div>
 
     }   
-
 
 </div>
