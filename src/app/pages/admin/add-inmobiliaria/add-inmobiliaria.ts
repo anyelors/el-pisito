@@ -41,9 +41,8 @@ export class AddInmobiliaria {
 
       next: (datos:InmobiliariaImagenDTO) => {
         this.inmobiliariaImagenDTO  = datos;
-      },
-      complete: () => {
-        this.uploadImagen(this.inmobiliariaImagenDTO);
+        if (!this.uploadImagen(this.inmobiliariaImagenDTO))
+          this._router.navigate(["/admin/list-inmobiliaria"]);
       }
     });
 
@@ -60,7 +59,7 @@ export class AddInmobiliaria {
 
   onImagenSelected( event: Event ):void{
     //Guardamos provisionalmente las imagenes seleccionadas sin enviarlas al servidor
-    this.imagenesSeleccionadas = this.inputImagen.nativeElement.files;
+    this.imagenesSeleccionadas = this.inputImagen.nativeElement.files;  //event.target.files
     const file = this.imagenesSeleccionadas[0];
 
     /* const fileInput = event.target as HTMLInputElement;
@@ -82,22 +81,26 @@ export class AddInmobiliaria {
     }
   }
 
-  uploadImagen(inmobiliariaImagenDTO:InmobiliariaImagenDTO):void{
+  uploadImagen(inmobiliariaImagenDTO:InmobiliariaImagenDTO):boolean{
 
-    if(this.imagenesSeleccionadas[0]){
+    if(this.imagenesSeleccionadas){
 
-        const formData:FormData = new FormData();
+      const formData:FormData = new FormData();
 
-        formData.append("file",this.imagenesSeleccionadas[0]);
-        formData.append("entidadImagen",EntidadImagen.INMOBILIARIA);
-        formData.append("entidadId",String(inmobiliariaImagenDTO.id));
-        formData.append("alt",`logo de la inmobiliaria ${inmobiliariaImagenDTO.nombre}`);
+      formData.append("file",this.imagenesSeleccionadas[0]);
+      formData.append("entidadImagen",EntidadImagen.INMOBILIARIA);
+      formData.append("entidadId",String(inmobiliariaImagenDTO.id));
+      formData.append("alt",`logo de la inmobiliaria ${inmobiliariaImagenDTO.nombre}`);
 
-        this._imagenesService.uploadImagen(formData).subscribe({
-          next: (datos:ImagenDTO) => {this._router.navigate(["/admin/list-inmobiliaria"]);}
-        })
+      this._imagenesService.uploadImagen(formData).subscribe({
+        next: (datos:ImagenDTO) => {this._router.navigate(["/admin/list-inmobiliaria"]);}
+      })
+
+      return true;
 
     }
+
+    return false;
 
   }
 
